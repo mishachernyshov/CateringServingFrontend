@@ -1,0 +1,668 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+}
+
+textarea {
+  resize: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.auth-wrapper {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 600px 1fr;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: ". . ."
+                       ". content ."
+                       ". . .";
+}
+
+.auth-container {
+  border: #206fee solid 5px;
+  border-radius: 17px;
+  grid-area: content;
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: #206fee;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.centered-form-item-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.auth-container .form-content {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 1rem;
+  width: 100%;
+  padding: 5px 10px 15px 10px;
+}
+
+.field-error {
+  color: #ee4545;
+}
+
+.form-control:focus {
+  border-color: #206fee;
+  box-shadow: 0 0 0 0.25rem rgba(0, 126, 255, 0.25);
+}
+
+.lang-switcher {
+  color: #ffffff;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#page-header-wrapper {
+  flex: 0 1 auto;
+}
+
+.encompassed-viewport {
+  flex: 1 1 auto;
+}
+
+.plus {
+  background: linear-gradient(to bottom, transparent 40%, #3165e6 40%, #3784f0 60%, transparent 60%), linear-gradient(to right, transparent 40%, #3165e6 40%, #3784f0 60%, transparent 60%);
+}
+
+.cross {
+  background: linear-gradient(45deg, transparent 40%, #e20d0d 40%, #d60606 60%, transparent 60%), linear-gradient(135deg, transparent 40%, #e20d0d 40%, #d60606 60%, transparent 60%);
+}
+
+.card {
+  width: fit-content;
+  margin: 10px;
+}
+
+.card-img {
+  width: 400px;
+  height: 250px;
+}
+
+.interactive-card:hover {
+  opacity: 0.85;
+}
+
+.add-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 190px;
+}
+
+.add-item {
+  width: 150px;
+  height: 150px;
+}
+
+.cards-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.selected-page {
+  color: #dee8f1;
+}
+
+.page-content-wrapper {
+  padding: 15px 20px;
+}
+
+#catering-establishment-create-or-edit-body-wrapper {
+  display: grid;
+  grid-template-columns: 150px auto;
+  grid-gap: 2rem 3rem;
+}
+
+.form-wrapper {
+  display: grid;
+  grid-template-columns: 150px auto;
+  grid-gap: 2rem 3rem;
+}
+
+#catering-establishment-create-or-edit-actions {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 10px;
+}
+
+.add-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+  height: 200px;
+}
+
+.add-photo {
+  width: 110px;
+  height: 110px;
+}
+
+.table-card-content {
+  display: grid;
+  grid-template-columns: 130px 70px auto;
+  grid-gap: 1rem;
+  grid-template-areas: "table-number-name table-number-value table-action-button"
+                       "table-clients-number-name table-clients-number-value table-action-button";
+}
+
+.table-number-name {
+  grid-area: table-number-name;
+}
+
+.table-number-value {
+  grid-area: table-number-value;
+}
+
+.table-clients-number-name {
+  grid-area: table-clients-number-name;
+}
+
+.table-clients-number-value {
+  grid-area: table-clients-number-value;
+}
+
+.table-action-button {
+  grid-area: table-action-button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-action-button:hover {
+  opacity: 0.85;
+}
+
+.table-action {
+  width: 60px;
+  height: 60px;
+}
+
+.dish-card {
+  width: 600px;
+}
+
+.dish-img-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.dish-img-wrapper img:hover {
+  cursor: pointer;
+}
+
+.dish-characteristics-wrapper {
+  display: grid;
+  grid-template-columns: 130px auto;
+  grid-gap: 1rem;
+  margin-top: 15px;
+}
+
+.inputs-sequence-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputs-sequence-wrapper {
+  display: flex;
+  gap: 15px 30px;
+}
+
+.inputs-sequence-wrapper .inputs-sequence-item-wrapper {
+  width: fit-content;
+}
+
+.centered-page-content-wrapper {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: ". . ."
+                       ". centered-page-content ."
+                       ". . .";
+}
+
+.centered-page-content {
+  grid-area: centered-page-content;
+}
+
+.catalog-with-operations {
+  display: grid;
+  grid-template-columns: auto 370px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "catalog-search-sort catalog-filter"
+                       "catalog-content catalog-filter";
+  grid-gap: 2rem 3rem;
+}
+
+.catalog-search-sort-wrapper {
+  grid-area: catalog-search-sort;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  height: fit-content;
+}
+
+.catalog-filter-wrapper {
+  grid-area: catalog-filter;
+}
+
+.catalog-content-wrapper {
+  grid-area: catalog-content;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.catalog-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem
+}
+
+.catalog-search {
+  min-width: 275px;
+  max-width: 400px;
+}
+
+.sorting-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sorting-buttons-wrapper {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.filtration-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.filters-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-name {
+  border-bottom: 1px solid #545454;
+  margin-bottom: 15px;
+}
+
+.vertical-flexbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-flexbox .inputs-sequence-item-wrapper {
+  width: 100%;
+}
+
+.catalog-no-data-feedback-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.catalog-nothing-found-msg {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}
+
+.big-loading-spinner {
+  width: 7rem;
+  height: 7rem;
+}
+
+.catalog-content-wrapper .card-wrapper {
+  width: 450px;
+}
+
+.catalog-content-wrapper img {
+  width: 450px;
+  height: 300px;
+}
+
+.catalog-content-wrapper .rating {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem
+}
+
+.catalog-content-wrapper .rating svg {
+  color: #f0cc16;
+}
+
+.card:hover {
+  transition: border 700ms ease-out;
+  border-color: rgb(95, 139, 203);
+}
+
+.catalog-address {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.catalog-card-additional-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.catering-establishment-main-info-wrapper .carousel img {
+  width: 650px;
+  height: 430px;
+  border-radius: 10px;
+}
+
+.catering-establishment-main-info-float {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 25px 25px 0;
+  font-size: 19px;
+  width: 650px;
+}
+
+.page-name {
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 1rem;
+}
+
+.catering-establishment-main-info-float .details {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+}
+
+.catering-establishment-main-info-float .details .rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 2.5rem;
+}
+
+.catering-establishment-main-info-float .details .rating svg {
+  color: #f0cc16;
+}
+
+.star {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  float: left;
+  color: rgb(240, 204, 22);
+  font-size: 50px;
+}
+
+.subtitle {
+  font-weight: 500;
+  font-size: 21px;
+  margin-bottom: 1rem;
+}
+
+.both-float-cleared {
+  clear: both;
+}
+
+.menu-dish-info-wrapper {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.menu-dish-info-wrapper button {
+  width: fit-content;
+}
+
+.dish-price-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.initial-price {
+  background: linear-gradient(135deg, transparent 45%, #e47f7f 45%, #e48787 55%, transparent 55%);
+  height: fit-content;
+}
+
+.discount-ellipse {
+  border-radius: 50%;
+  width: fit-content;
+  height: fit-content;
+  padding: 12px;
+  background-color: #d14027;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.card-body .action-btn {
+  width: 100%;
+}
+
+.range-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.range-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#menu {
+  margin-bottom: 1rem;
+}
+
+.feedbacks {
+  max-width: 800px;
+}
+
+.feedback-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feedback-action-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.feedback-info {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.posted-feedbacks-wrapper {
+  margin-bottom: 1rem;
+}
+
+.feedback-author {
+  font-weight: 500;
+}
+
+.booking-creation-form-wrapper {
+  display: grid;
+  grid-template-columns: 70px auto;
+  grid-gap: 2rem 3rem;
+}
+
+#booking-filters-wrapper {
+  margin-bottom: 1rem;
+}
+
+#bookings-list .edit-icon-wrapper svg {
+  font-size: 1.7rem;
+}
+
+.edit-icon-wrapper {
+  padding: 5px;
+  margin: 0 10px;
+  color: #c49206;
+}
+
+.edit-icon-wrapper:hover {
+  color: #d57900;
+}
+
+#bookings-list .accordion-header button {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#bookings-list .accordion-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+#bookings-list .accordion-body img {
+  width: 500px;
+  height: 320px;
+}
+
+.booking-info {
+  flex-grow: 1;
+}
+
+.delete-ordered-dish {
+  color: #c31111;
+  font-size: 40px;
+}
+
+.booking-info .total-sum {
+  margin-bottom: 1rem;
+}
+
+.booking-info .action-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem
+}
+
+.booking-payment-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.booking-payment-wrapper > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.booking-payment-wrapper .price {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.card-expiration input {
+  width: 45px;
+}
+
+.card-expiration > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.cvv2 input {
+  width: 55px;
+}
+
+.card-number {
+  width: 100%;
+}
+
+.paid-status {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.paid-status svg {
+  color: #79c312;
+  font-size: 2rem;
+}

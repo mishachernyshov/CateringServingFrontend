@@ -1,0 +1,8 @@
+export const CATALOG_PAGE_SIZE = 9;
+export const FEEDBACKS_PAGE_SIZE = 20;
+export const PAGE_RANGE_DISPLAYED = 3;
+export const MARGIN_PAGES_DISPLAYED = 1;
+export const CUT_CATERING_ESTABLISHMENTS_DESCRIPTION_LENGTH = 200;
+export const TIME_LOCATE = 'uk';
+export const DISH_WEIGHT_BASE = 100;
+export const ALLOWED_ORDERING_DAYS_RANGE = 7;
