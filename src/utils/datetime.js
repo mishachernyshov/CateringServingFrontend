@@ -19,6 +19,11 @@ export const parseTimeComponents = input => {
   return undefined;
 };
 
+export const isToday = date => {
+  const today = new Date();
+  return date.toDateString() === today.toDateString();
+}
+
 export const extractTime = input => {
     const timeComponents = parseTimeComponents(input);
     if (timeComponents) {

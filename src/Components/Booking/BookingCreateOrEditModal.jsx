@@ -16,12 +16,13 @@ import {
   getWorkHoursInterval,
   parseIsoDate,
   parseTimeComponents,
+  isToday,
 } from "../../utils/datetime";
 import {dummyFunction} from "../../utils/functools";
 import {ALLOWED_ORDERING_DAYS_RANGE, TIME_LOCATE} from "../../data/constants/settings";
 import {getObject} from "../../utils/array";
 import TimelineChangeType from "../../data/enums/timelineChangeType";
-import {isTimeRangeAllowed} from "../../utils/timeline";
+import {isTimeRangeAllowed, combineDisabledTimelineIntervals} from "../../utils/timeline";
 import {makeAuthenticatedRequest} from "../../utils/request";
 import Spinner from "react-bootstrap/Spinner";
 import {useNavigate} from "react-router-dom";
@@ -128,20 +129,35 @@ export default memo(({show, closeHandler, bookingId}) => {
       navigate,
     )
       .then(response => {
+        const intervalsToCombine = [
+          ...getDisabledWorkHoursInterval(),
+          ...response.data.map(dataItem => {
+            const startDateTime = new Date(dataItem.start_datetime);
+            const endDateTime = new Date(dataItem.end_datetime);
+
+            return {
+              start: getTodayAtSpecificTime({
+                hours: startDateTime.getHours(), minutes: startDateTime.getMinutes(),
+              }),
+              end: getTodayAtSpecificTime({
+                hours: endDateTime.getHours(), minutes: endDateTime.getMinutes(),
+              }),
+            };
+          }),
+        ];
+
+        if (isToday(new Date(date))) {
+          intervalsToCombine.push({
+            start: getTodayAtSpecificTime({hours: 0}),
+            end: new Date(),
+          });
+        }
         dispatchTimeline({
           type: TimelineChangeType.DISABLED_INTERVALS_CHANGED,
-          payload: [
-            ...getDisabledWorkHoursInterval(),
-            ...response.data.map(dataItem => {
-              return {
-                start: getTodayAtSpecificTime(parseTimeComponents(dataItem.start_datetime)),
-                end: getTodayAtSpecificTime(parseTimeComponents(dataItem.end_datetime)),
-              };
-            }),
-          ],
-        })
+          payload: combineDisabledTimelineIntervals(intervalsToCombine),
+        });
       })
-  }, [date, table, navigate]);
+  }, [date, table, navigate, getDisabledWorkHoursInterval]);
 
   useEffect(() => {
     if (date && table) {
@@ -165,24 +181,6 @@ export default memo(({show, closeHandler, bookingId}) => {
       catering_establishment_table: table.id,
     };
   };
-
-  // const getNewBookingData = () => {
-  //   const startDatetime = new Date(date);
-  //   const startTimeComponents = parseTimeComponents(timeline.timeRange[0].toLocaleTimeString(TIME_LOCATE));
-  //   startDatetime.setHours(startTimeComponents.hours);
-  //   startDatetime.setMinutes(startTimeComponents.minutes);
-  //
-  //   const endDatetime = new Date(date);
-  //   const endTimeComponents = parseTimeComponents(timeline.timeRange[1].toLocaleTimeString(TIME_LOCATE));
-  //   endDatetime.setHours(endTimeComponents.hours);
-  //   endDatetime.setMinutes(endTimeComponents.minutes);
-  //
-  //   return {
-  //     start_datetime: startDatetime.toISOString(),
-  //     end_datetime: endDatetime.toISOString(),
-  //     catering_establishment_table: table.id,
-  //   };
-  // };
 
   const resetAndClose = () => {
     setTable(null);
