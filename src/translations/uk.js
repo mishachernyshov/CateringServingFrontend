@@ -95,7 +95,7 @@ const TRANSLATIONS_UK = {
   "Price, ₴": "Ціна, ₴",
   "Confirm": "Підтвердити",
   "Add new booking": "Додати нове бронювання",
-  "Booking creation": "Створення замовлення",
+  "Booking creation": "Створення бронювання",
   "Date": "Дата",
   "Table": "Столик",
   "for %d clients": "для %d клієнтів",
@@ -117,6 +117,7 @@ const TRANSLATIONS_UK = {
   "g": "г",
   "Successfully paid": "Оплата пройшла успішно",
   "Booking editing": "Редагування бронювання",
+  "The order is empty.": "Замовлення порожнє.",
 
   "date_format": "{{date, DD.MM.YYYY HH:mm}}",
 };

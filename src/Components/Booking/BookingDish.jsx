@@ -15,9 +15,7 @@ export default memo(function BookingDish ({orderedDish, dishesNames, booking, se
   const changeWeight = event => {
     const updatedBooking = deepcopy(booking);
     const updatedOrderedDish = updatedBooking.ordered_dishes.find(
-      currentOrderedDish => (
-        currentOrderedDish.catering_establishment_dish.dish === orderedDish.catering_establishment_dish.dish
-      )
+      currentOrderedDish => currentOrderedDish.id === orderedDish.id
     );
     updatedOrderedDish.weight = event.target.value;
     setBooking(updatedBooking);
@@ -26,9 +24,7 @@ export default memo(function BookingDish ({orderedDish, dishesNames, booking, se
   const deleteDishFromOrder = () => {
     const updatedBooking = deepcopy(booking);
     updatedBooking.ordered_dishes = updatedBooking.ordered_dishes.filter(
-      currentOrderedDish => (
-        currentOrderedDish.catering_establishment_dish.dish !== orderedDish.catering_establishment_dish.dish
-      )
+      currentOrderedDish => currentOrderedDish.id !== orderedDish.id
     );
     setBooking(updatedBooking);
   };
