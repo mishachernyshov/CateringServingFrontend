@@ -68,7 +68,7 @@ export default React.memo(function CatalogContent ({cateringEstablishments, loca
                   <div className='catalog-card-additional-info'>
                     <div className='rating'>
                       <BsFillStarFill />
-                      <div>{establishmentData['rating']}</div>
+                      <div>{establishmentData['rating'].toFixed(1)}</div>
                     </div>
                     <div className='catalog-address'>
                       {

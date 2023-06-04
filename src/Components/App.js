@@ -16,6 +16,7 @@ import PageNotFound from "./Navigation/PageNotFound";
 import CateringEstablishments from "./CateringEstablishments/CateringEstablishments";
 import CateringEstablishment from "./CateringEstablishments/CateringEstablishment";
 import BookingsWrapper from "./Booking/BookingsWrapper";
+import Statistics from "./UserComponents/CateringEstablishments/Statistics/Statistics";
 
 
 const queryClient = new QueryClient({
@@ -50,6 +51,7 @@ function App() {
               <Route path='list' element={<UserCateringEstablishments />} />
               <Route path='new' element={<CateringEstablishmentCreateOrEdit />} />
               <Route path='edit/:id' element={<CateringEstablishmentCreateOrEdit />} />
+              <Route path='statistics' element={<Statistics />} />
             </Route>
             <Route path='/catering_establishments'>
               <Route path='' element={<CateringEstablishments />} />

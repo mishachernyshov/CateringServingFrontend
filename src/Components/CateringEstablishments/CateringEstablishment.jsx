@@ -105,7 +105,7 @@ export default function CateringEstablishment () {
                   <div>{t('Average grade')}:</div>
                   <div className='rating'>
                     <span className='star'>★</span>
-                    <div>{mainInfo['rating']}</div>
+                    <div>{mainInfo['rating'].toFixed(1)}</div>
                   </div>
                   <div>{t('Your grade')}:</div>
                   <div>

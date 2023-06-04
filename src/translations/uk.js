@@ -118,6 +118,17 @@ const TRANSLATIONS_UK = {
   "Successfully paid": "Оплата пройшла успішно",
   "Booking editing": "Редагування бронювання",
   "The order is empty.": "Замовлення порожнє.",
+  "Statistics": "Статистика",
+  "Establishments rating by bookings count": "Рейтинг закладів за кількістю бронювань",
+  "Choose dates range": "Оберіть діапазон дат",
+  "Show results": "Показати результати",
+  "Bookings count": "Кількість бронювань",
+  "There were no bookings for the specified period.": "Не було жодного бронювання за вказаний період.",
+  "There were no orders for the specified period.": "Не було жодного замовлення за вказаний період.",
+  "Dishes rating by ordering count": "Рейтинг страв за кількістю замовлень",
+  "Select an establishment": "Оберіть заклад",
+  "All": "Усі",
+  "Order count": "Кількість замовлень",
 
   "date_format": "{{date, DD.MM.YYYY HH:mm}}",
 };

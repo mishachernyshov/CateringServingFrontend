@@ -20,6 +20,7 @@ import {getTodayAtSpecificTime, getWorkHoursInterval, extractTime} from "../../.
 import {TIME_LOCATE} from "../../../data/constants/settings";
 import {dummyFunction} from "../../../utils/functools";
 import ComponentMode from "../../../data/enums/componentMode";
+import deepcopy from "deepcopy";
 
 
 const workHoursInterval = getWorkHoursInterval();
@@ -218,7 +219,7 @@ export default function CateringEstablishmentCreateOrEdit () {
         .then(encodedImage => data['photos'].push(encodedImage));
     }
 
-    const dishesToSend = [...dishes];
+    const dishesToSend = deepcopy(dishes);
     for (const dish of dishesToSend) {
       if (!dish['discount']['enabled']) {
         delete dish['discount'];
@@ -241,12 +242,13 @@ export default function CateringEstablishmentCreateOrEdit () {
 
     return makeAuthenticatedRequest(
       {
-        url: process.env.REACT_APP_BACKEND_URL + process.env.REACT_APP_CATERING_ESTABLISHMENT_URL,
+        url: process.env.REACT_APP_BACKEND_URL + process.env.REACT_APP_CATERING_ESTABLISHMENT_CREATION_URL,
         method: 'post',
         data: dataToSend,
       },
       navigate,
-    );
+    )
+      .then(response => navigate(`/user_catering_establishments/edit/${response.data.id}`));
   };
 
   const handleCateringEstablishmentUpdating = async () => {

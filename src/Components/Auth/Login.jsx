@@ -30,7 +30,7 @@ export default function Login () {
       .then(response => {
         localStorage.setItem(process.env.REACT_APP_LOCAL_STORAGE_ACCESS_TOKEN_KEY, response.data.access);
         localStorage.setItem(process.env.REACT_APP_LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refresh);
-        navigate('/user_catering_establishments/list');
+        navigate('/catering_establishments');
       })
       .catch(error => {
         setErrors(error.response.data);

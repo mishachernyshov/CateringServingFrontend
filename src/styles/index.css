@@ -666,3 +666,44 @@ code {
   color: #79c312;
   font-size: 2rem;
 }
+
+.statistics-item-wrapper {
+  margin-bottom: 30px;
+}
+
+#statistics-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 10px 0 10px;
+}
+
+.statistics-name {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.statistics-filters-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3rem;
+  align-items: flex-end;
+  margin: 10px 0;
+}
+
+.statistics-filter-name {
+  margin-bottom: 10px;
+}
+
+.statistics-dates-range {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.statistics-body .action-btn-wrapper {
+  margin: 20px 0;
+}
+
+.statistics-body table {
+  max-width: 500px;
+}
+
