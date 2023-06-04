@@ -1,4 +1,4 @@
-import {memo, useCallback, useContext, useMemo, useState} from "react";
+import {memo, useCallback, useContext, useEffect, useMemo, useState} from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Table from 'react-bootstrap/Table';
 import {AiOutlineEdit} from "react-icons/ai";
@@ -120,6 +120,10 @@ export default memo(function Booking (
         setUserBookings(updatedUserBookings);
       })
   }
+
+  useEffect(() => {
+    setBooking(bookingData);
+  }, [bookingData]);
 
   return (
     <>

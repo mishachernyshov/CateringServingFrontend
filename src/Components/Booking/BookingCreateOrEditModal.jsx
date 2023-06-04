@@ -28,7 +28,7 @@ import Spinner from "react-bootstrap/Spinner";
 import {useNavigate} from "react-router-dom";
 import UserBookingsContext, {UserBookingsSetContext} from "./UserBookingsContext";
 import ComponentMode from "../../data/enums/componentMode";
-import {updateDate as updateDateObject} from "../../utils/datetime";
+import deepcopy from "deepcopy";
 
 const workHoursInterval = getWorkHoursInterval();
 const minDate = parseIsoDate(new Date().toISOString());
@@ -152,6 +152,15 @@ export default memo(({show, closeHandler, bookingId}) => {
             end: new Date(),
           });
         }
+        if (mode === ComponentMode.Editing) {
+          const intervalIndex = intervalsToCombine.findIndex(
+            interval => (
+              interval.start.toISOString() === booking.start_datetime
+              && interval.end.toISOString() === booking.end_datetime
+            )
+          );
+          intervalsToCombine.splice(intervalIndex, 1);
+        }
         dispatchTimeline({
           type: TimelineChangeType.DISABLED_INTERVALS_CHANGED,
           payload: combineDisabledTimelineIntervals(intervalsToCombine),
@@ -165,7 +174,7 @@ export default memo(({show, closeHandler, bookingId}) => {
     }
   }, [date, getBookings, table]);
 
-  const getNewBookingData = () => {
+  const buildBookingData = () => {
     const startDateTime = buildDateWithUpdatedComponents(
       date,
       {hours: timeline.timeRange[0].getHours(), minutes: timeline.timeRange[0].getMinutes()},
@@ -193,7 +202,7 @@ export default memo(({show, closeHandler, bookingId}) => {
       {
         url: `${process.env.REACT_APP_BACKEND_URL}${process.env.REACT_APP_BOOKING_URL}`,
         method: 'post',
-        data: getNewBookingData(),
+        data: buildBookingData(),
       },
       navigate,
     )
@@ -203,15 +212,46 @@ export default memo(({show, closeHandler, bookingId}) => {
       })
   };
 
+  const updateBooking = () => {
+    makeAuthenticatedRequest(
+      {
+        url: `${process.env.REACT_APP_BACKEND_URL}${process.env.REACT_APP_BOOKING_URL}${booking.id}/`,
+        method: 'patch',
+        data: buildBookingData(),
+      },
+      navigate,
+    )
+      .then(response => {
+        const data = response.data;
+        const updatedUserBookings = deepcopy(userBookings);
+        debugger;
+        for (let i = 0; i < updatedUserBookings.length; ++i) {
+          if (updatedUserBookings[i].id === booking.id) {
+            updatedUserBookings[i] = {...updatedUserBookings[i], ...data};
+            break;
+          }
+        }
+        setUserBookings(updatedUserBookings);
+        resetAndClose();
+      });
+  };
+
   useEffect(() => {
     if (mode === ComponentMode.Editing && tables) {
+      const startDateTime = new Date(booking.start_datetime);
+      const endDateTime = new Date(booking.end_datetime);
+      const bookingTimeRange = [
+        getTodayAtSpecificTime({
+          hours: startDateTime.getHours(), minutes: startDateTime.getMinutes(),
+        }),
+        getTodayAtSpecificTime({
+          hours: endDateTime.getHours(), minutes: endDateTime.getMinutes(),
+        }),
+      ];
+
+      dispatchTimeline({type: TimelineChangeType.TIME_RANGE_CHANGED, payload: bookingTimeRange});
       setTable(getObject(tables, 'id', booking.catering_establishment_table));
       setDate(parseIsoDate(booking.start_datetime));
-      const bookingTimeRange = [
-        getTodayAtSpecificTime(parseTimeComponents(booking.start_datetime)),
-        getTodayAtSpecificTime(parseTimeComponents(booking.end_datetime)),
-      ];
-      dispatchTimeline({type: TimelineChangeType.TIME_RANGE_CHANGED, payload: bookingTimeRange});
     }
   }, [booking, mode, tables]);
 
@@ -278,12 +318,21 @@ export default memo(({show, closeHandler, bookingId}) => {
         <Button variant='secondary' onClick={resetAndClose}>
           {t('Close')}
         </Button>
-        <Button
-          className='action-btn' disabled={!showTimeline || timeline.error}
-          onClick={createBooking}
-        >
-            {mode === ComponentMode.Creation ? t('Add') : t('Save')}
-        </Button>
+        {
+          mode === ComponentMode.Creation
+            ? <Button
+                className='action-btn' disabled={!showTimeline || timeline.error}
+                onClick={createBooking}
+              >
+                {t('Add')}
+              </Button>
+            : <Button
+                className='action-btn' disabled={!showTimeline || timeline.error}
+                onClick={updateBooking}
+              >
+                {t('Save')}
+              </Button>
+        }
       </Modal.Footer>
     </Modal>
   )
