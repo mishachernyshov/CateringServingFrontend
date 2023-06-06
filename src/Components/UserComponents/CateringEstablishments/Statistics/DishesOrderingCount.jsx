@@ -9,6 +9,7 @@ import {getObject} from "../../../../utils/array";
 import Button from "react-bootstrap/Button";
 import {makeAuthenticatedRequest} from "../../../../utils/request";
 import Table from "react-bootstrap/Table";
+import {CSVLink} from "react-csv";
 
 
 export default memo(({cateringEstablishments}) => {
@@ -64,6 +65,12 @@ export default memo(({cateringEstablishments}) => {
     });
   };
 
+  const buildStatisticsRepresentation = () => {
+    return statistics.map((item, index) => [index + 1, item.name, item.orders_count]);
+  };
+
+  const headers = ['#', t('Name'), t('Order count')];
+
   return (
     <div className='statistics-item-wrapper dishes-ordering-count-statistics'>
       <div className='statistics-name'>{t('Dishes rating by ordering count')}</div>
@@ -113,26 +120,25 @@ export default memo(({cateringEstablishments}) => {
       {
         showResults
           ? statistics.length
-            ? <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>{t('Name')}</th>
-                    <th>{t('Order count')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                  statistics.map((item, index) =>
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.orders_count}</td>
-                    </tr>
-                  )
-                }
-                </tbody>
-              </Table>
+            ? <>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>{headers.map(header => <th>{header}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                  {
+                    statistics.map((item, index) =>
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.name}</td>
+                        <td>{item.orders_count}</td>
+                      </tr>
+                    )
+                  }
+                  </tbody>
+                </Table>
+                <CSVLink data={buildStatisticsRepresentation()} headers={headers}>{t('Download a report')}</CSVLink>
+              </>
             : <div>{t('There were no orders for the specified period.')}</div>
           : <></>
         }

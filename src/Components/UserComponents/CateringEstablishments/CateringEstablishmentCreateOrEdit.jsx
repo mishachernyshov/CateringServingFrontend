@@ -29,7 +29,9 @@ const workHoursInterval = getWorkHoursInterval();
 export default function CateringEstablishmentCreateOrEdit () {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [enterpriseNumber, setEnterpriseNumber] = useState('');
   const [visibilityStatus, setVisibilityStatus] = useState(true);
+  const [freeUsage, setFreeUsage] = useState(false);
   const [tables, setTables] = useState([]);
   const [newTableData, setNewTableData] = useState({});
   const [photos, setPhotos] = useState([]);
@@ -113,6 +115,7 @@ export default function CateringEstablishmentCreateOrEdit () {
           setName(dishEditingInfoResponse.data['name']);
           setDescription(dishEditingInfoResponse.data['description']);
           setVisibilityStatus(dishEditingInfoResponse.data['is_visible']);
+          setEnterpriseNumber(dishEditingInfoResponse.data['enterprise_number']);
           setTables(dishEditingInfoResponse.data['tables']);
           setPhotos(dishEditingInfoResponse.data['photos']);
           dispatchTimeline({
@@ -201,6 +204,7 @@ export default function CateringEstablishmentCreateOrEdit () {
       name: name,
       description: description,
       is_visible: visibilityStatus,
+      enterprise_number: enterpriseNumber,
       work_hours: {
         start_time: timeline.timeRange[0].toLocaleTimeString(TIME_LOCATE),
         end_time: timeline.timeRange[1].toLocaleTimeString(TIME_LOCATE),
@@ -284,6 +288,15 @@ export default function CateringEstablishmentCreateOrEdit () {
           onChange={event => {
             setDescription(event.target.value);
           }}
+        />
+        <div>{t("Enterprise number")}</div>
+        <Form.Control
+          maxLength='64'
+          value={enterpriseNumber}
+          onChange={event => {
+            setEnterpriseNumber(event.target.value);
+          }}
+          style={{ maxWidth: 500 }}
         />
         <Form.Check
           type='checkbox'
@@ -422,12 +435,25 @@ export default function CateringEstablishmentCreateOrEdit () {
         </div>
         }
       </div>
+      {
+          modeInfo['name'] === ComponentMode.Creation
+            ? <Form.Check
+                type='checkbox'
+                label={t("I'm agree with 6 month free usage.")}
+                checked={freeUsage}
+                onChange={_ => {
+                  setFreeUsage(!freeUsage);
+                }}
+              />
+            : <></>
+        }
       <div id='catering-establishment-create-or-edit-actions'>
         {
           modeInfo['name'] === ComponentMode.Creation
             ? <Button
                 variant="primary"
                 size="lg"
+                disabled={!freeUsage}
                 onClick={handleCateringEstablishmentCreation}
               >
                 {t('Create')}

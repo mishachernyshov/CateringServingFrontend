@@ -129,6 +129,9 @@ const TRANSLATIONS_UK = {
   "Select an establishment": "Оберіть заклад",
   "All": "Усі",
   "Order count": "Кількість замовлень",
+  "Download a report": "Завантажити звіт",
+  "Enterprise number": "Ідентифікатор закладу",
+  "I'm agree with 6 month free usage.": "Я погоджуюсь із використанням продукту безкоштовно протягом 6 місяців.",
 
   "date_format": "{{date, DD.MM.YYYY HH:mm}}",
 };
